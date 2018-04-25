@@ -4,41 +4,54 @@
 
 console.log('app.js engage');
 
-var template = React.createElement(
+var header = {
+	title: 'Indecision App',
+	subTitle: 'Some random info'
+};
+
+var headerDOM = React.createElement(
 	'div',
 	null,
 	React.createElement(
 		'h1',
 		null,
-		'Indecision App'
+		header.title
 	),
 	React.createElement(
 		'p',
 		null,
-		'Some info'
+		header.subTitle
 	)
 );
 
-var keith = React.createElement(
+var user = {
+	name: 'KatoMono',
+	age: 20,
+	location: 'Lavras, MG - Brazil'
+};
+
+var userDOM = React.createElement(
 	'div',
 	null,
 	React.createElement(
 		'h1',
 		null,
-		'KatoMono Enkeli'
+		user.name
 	),
 	React.createElement(
 		'p',
 		null,
-		'Age: 20'
+		'Age: ',
+		user.age
 	),
 	React.createElement(
 		'p',
 		null,
-		'Location: Lavras, MG - Brasil'
+		'Location: ',
+		user.location
 	)
 );
 
 var appRoot = document.getElementById('app');
 
-ReactDOM.render(keith, appRoot);
+ReactDOM.render(headerDOM, appRoot);

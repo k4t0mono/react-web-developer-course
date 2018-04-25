@@ -2,21 +2,32 @@
 
 console.log('app.js engage');
 
-var template = (
+var header = {
+	title: 'Indecision App',
+	subTitle: 'Some random info'
+};
+
+var headerDOM = (
 	<div>
-		<h1>Indecision App</h1>
-		<p>Some info</p>
+		<h1>{ header.title }</h1>
+		<p>{ header.subTitle }</p>
 	</div>
 );
 
-var keith = (
+var user = {
+	name: 'KatoMono',
+	age: 20,
+	location: 'Lavras, MG - Brazil'
+};
+
+var userDOM = (
 	<div>
-		<h1>KatoMono Enkeli</h1>
-		<p>Age: 20</p>
-		<p>Location: Lavras, MG - Brasil</p>
+		<h1>{ user.name }</h1>
+		<p>Age: { user.age }</p>
+		<p>Location: { user.location }</p>
 	</div>
 );
 
 var appRoot = document.getElementById('app');
 
-ReactDOM.render(keith, appRoot);
+ReactDOM.render(headerDOM, appRoot);
