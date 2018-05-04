@@ -30,38 +30,46 @@ var headerDOM = React.createElement(
 	)
 );
 
-var user = {
-	name: 'KatoMono',
-	age: 20,
-	location: 'Lavras, MG - Brazil'
+var count = 0;
+
+var addOne = function addOne() {
+	console.log('addOne');
 };
 
-var getLocation = function getLocation(loc) {
-	if (loc) return React.createElement(
-		'p',
-		null,
-		'Location: ',
-		loc
-	);
+var minusOne = function minusOne() {
+	console.log('minusOne');
 };
 
-var userDOM = React.createElement(
+var reset = function reset() {
+	console.log('reset');
+};
+
+var countDOM = React.createElement(
 	'div',
 	null,
 	React.createElement(
 		'h1',
 		null,
-		user.name ? user.name : 'Anonymus'
+		'Count: ',
+		count
 	),
-	user.age >= 18 && React.createElement(
-		'p',
-		null,
-		'Age: ',
-		user.age
+	React.createElement(
+		'button',
+		{ onClick: addOne },
+		'+1'
 	),
-	getLocation(user.location)
+	React.createElement(
+		'button',
+		{ onClick: minusOne },
+		'-1'
+	),
+	React.createElement(
+		'button',
+		{ onClick: reset },
+		'Reset'
+	)
 );
 
 var appRoot = document.getElementById('app');
 
-ReactDOM.render(headerDOM, appRoot);
+ReactDOM.render(countDOM, appRoot);

@@ -2,13 +2,13 @@
 
 console.log('app.js engage');
 
-var header = {
+const header = {
 	title: 'Indecision App',
 	subTitle: 'Some random info',
 	options: ['One', 'Two']
 };
 
-var headerDOM = (
+const headerDOM = (
 	<div>
 		<h1>{ header.title }</h1>
 		{ header.subTitle && <p>{ header.subTitle }</p> }
@@ -16,25 +16,29 @@ var headerDOM = (
 	</div>
 );
 
-var user = {
-	name: 'KatoMono',
-	age: 20,
-	location: 'Lavras, MG - Brazil'
+let count = 0;
+
+const addOne = () => {
+	console.log('addOne');
 };
 
-var getLocation = (loc) => {
-	if(loc)
-		return <p>Location: { loc }</p>;
+const minusOne = () => {
+	console.log('minusOne');
 };
 
-var userDOM = (
+const reset = () => {
+	console.log('reset');
+};
+
+const countDOM = (
 	<div>
-		<h1>{ user.name ? user.name : 'Anonymus' }</h1>
-		{ user.age >= 18 &&  <p>Age: { user.age }</p> }
-		{ getLocation(user.location) }
+		<h1>Count: { count }</h1>
+		<button onClick={ addOne }>+1</button>
+		<button onClick={ minusOne }>-1</button>
+		<button onClick={ reset }>Reset</button>
 	</div>
 );
 
-var appRoot = document.getElementById('app');
+const appRoot = document.getElementById('app');
 
-ReactDOM.render(headerDOM, appRoot);
+ReactDOM.render(countDOM, appRoot);
