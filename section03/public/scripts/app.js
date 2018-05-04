@@ -28,6 +28,13 @@ var nukeOptions = function nukeOptions() {
 	renderApp();
 };
 
+var onMakeDecision = function onMakeDecision() {
+	var index = Math.floor(Math.random() * app.options.length);
+	var op = app.options[index];
+
+	alert(op);
+};
+
 var appRoot = document.getElementById('app');
 
 var renderApp = function renderApp() {
@@ -50,9 +57,9 @@ var renderApp = function renderApp() {
 			app.options.length ? 'Here are your options' : 'No options'
 		),
 		React.createElement(
-			'p',
-			null,
-			app.options.length
+			'button',
+			{ onClick: onMakeDecision, disabled: app.options.length === 0 },
+			'What should I do?'
 		),
 		React.createElement(
 			'button',

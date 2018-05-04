@@ -27,6 +27,13 @@ const nukeOptions = () => {
 	renderApp();
 };
 
+const onMakeDecision = () => {
+	const index = Math.floor(Math.random() * app.options.length);
+	const op = app.options[index];
+
+	alert(op);
+};
+
 const appRoot = document.getElementById('app');
 
 const renderApp = () => {
@@ -36,8 +43,8 @@ const renderApp = () => {
 			{ app.subTitle && <p>{ app.subTitle }</p> }
 
 			<p>{ app.options.length ? 'Here are your options' : 'No options' }</p>
-			<p>{ app.options.length }</p>
 
+			<button onClick={ onMakeDecision } disabled={ app.options.length === 0 }>What should I do?</button>
 			<button onClick={ nukeOptions }>Nuke Options</button>
 
 			<ol>
