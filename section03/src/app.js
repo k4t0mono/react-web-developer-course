@@ -2,50 +2,52 @@
 
 console.log('app.js engage');
 
-const header = {
+const app = {
 	title: 'Indecision App',
 	subTitle: 'Some random info',
-	options: ['One', 'Two']
+	options: []
 };
 
-const headerDOM = (
-	<div>
-		<h1>{ header.title }</h1>
-		{ header.subTitle && <p>{ header.subTitle }</p> }
-		<p>{ header.options ? 'I have some options' : 'No options' }</p>
-	</div>
-);
 
-let count = 0;
+const onFormSubmit = (e) => {
+	e.preventDefault();
 
-const addOne = () => {
-	count++;
-	renderCounterApp();
+	const option = e.target.elements.option.value;
+	if(!option) return;
+	
+	app.options.push(option);
+	e.target.elements.option.values = '';
+
+	renderApp();
 };
 
-const minusOne = () => {
-	count--;
-	renderCounterApp();
-};
+const nukeOptions = () => {
+	app.options = [];
 
-const reset = () => {
-	count = 0;
-	renderCounterApp();
+	renderApp();
 };
 
 const appRoot = document.getElementById('app');
 
-const renderCounterApp = () => {
-	const countDOM = (
+const renderApp = () => {
+	const appDOM = (
 		<div>
-			<h1>Count: { count }</h1>
-			<button onClick={ addOne }>+1</button>
-			<button onClick={ minusOne }>-1</button>
-			<button onClick={ reset }>Reset</button>
+			<h1>{ app.title }</h1>
+			{ app.subTitle && <p>{ app.subTitle }</p> }
+
+			<p>{ app.options.length ? 'Here are your options' : 'No options' }</p>
+			<p>{ app.options.length }</p>
+
+			<button onClick={ nukeOptions }>Nuke Options</button>
+			
+			<form onSubmit={ onFormSubmit }>
+				<input type='text' name='option' />
+				<button>Add Option</button>
+			</form>
 		</div>
 	);
 
-	ReactDOM.render(countDOM, appRoot);
+	ReactDOM.render(appDOM, appRoot);
 };
 
-renderCounterApp();
+renderApp();

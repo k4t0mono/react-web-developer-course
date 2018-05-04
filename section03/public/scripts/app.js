@@ -4,79 +4,74 @@
 
 console.log('app.js engage');
 
-var header = {
+var app = {
 	title: 'Indecision App',
 	subTitle: 'Some random info',
-	options: ['One', 'Two']
+	options: []
 };
 
-var headerDOM = React.createElement(
-	'div',
-	null,
-	React.createElement(
-		'h1',
-		null,
-		header.title
-	),
-	header.subTitle && React.createElement(
-		'p',
-		null,
-		header.subTitle
-	),
-	React.createElement(
-		'p',
-		null,
-		header.options ? 'I have some options' : 'No options'
-	)
-);
+var onFormSubmit = function onFormSubmit(e) {
+	e.preventDefault();
 
-var count = 0;
+	var option = e.target.elements.option.value;
+	if (!option) return;
 
-var addOne = function addOne() {
-	count++;
-	renderCounterApp();
+	app.options.push(option);
+	e.target.elements.option.values = '';
+
+	renderApp();
 };
 
-var minusOne = function minusOne() {
-	count--;
-	renderCounterApp();
-};
+var nukeOptions = function nukeOptions() {
+	app.options = [];
 
-var reset = function reset() {
-	count = 0;
-	renderCounterApp();
+	renderApp();
 };
 
 var appRoot = document.getElementById('app');
 
-var renderCounterApp = function renderCounterApp() {
-	var countDOM = React.createElement(
+var renderApp = function renderApp() {
+	var appDOM = React.createElement(
 		'div',
 		null,
 		React.createElement(
 			'h1',
 			null,
-			'Count: ',
-			count
+			app.title
+		),
+		app.subTitle && React.createElement(
+			'p',
+			null,
+			app.subTitle
+		),
+		React.createElement(
+			'p',
+			null,
+			app.options.length ? 'Here are your options' : 'No options'
+		),
+		React.createElement(
+			'p',
+			null,
+			app.options.length
 		),
 		React.createElement(
 			'button',
-			{ onClick: addOne },
-			'+1'
+			{ onClick: nukeOptions },
+			'Nuke Options'
 		),
 		React.createElement(
-			'button',
-			{ onClick: minusOne },
-			'-1'
-		),
-		React.createElement(
-			'button',
-			{ onClick: reset },
-			'Reset'
+			'form',
+			{ onSubmit: onFormSubmit },
+			React.createElement('input', { type: 'text', name: 'option' }),
+			React.createElement(
+				'button',
+				null,
+				'Add Option'
+			)
 		)
 	);
 
-	ReactDOM.render(countDOM, appRoot);
+	ReactDOM.render(appDOM, appRoot);
 };
 
-renderCounterApp();
+renderApp();
