@@ -39,7 +39,11 @@ const renderApp = () => {
 			<p>{ app.options.length }</p>
 
 			<button onClick={ nukeOptions }>Nuke Options</button>
-			
+
+			<ol>
+				{ app.options.map((op) => <li key={ op }>{ op }</li>) }
+			</ol>
+
 			<form onSubmit={ onFormSubmit }>
 				<input type='text' name='option' />
 				<button>Add Option</button>

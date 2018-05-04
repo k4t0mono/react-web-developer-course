@@ -60,6 +60,17 @@ var renderApp = function renderApp() {
 			'Nuke Options'
 		),
 		React.createElement(
+			'ol',
+			null,
+			app.options.map(function (op) {
+				return React.createElement(
+					'li',
+					{ key: op },
+					op
+				);
+			})
+		),
+		React.createElement(
 			'form',
 			{ onSubmit: onFormSubmit },
 			React.createElement('input', { type: 'text', name: 'option' }),
