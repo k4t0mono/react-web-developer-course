@@ -127,22 +127,22 @@ var Option = function (_React$Component4) {
 	return Option;
 }(React.Component);
 
-//{ app.options.map((op) => <li key={ op }>{ op }</li>) }
-
-
 var Options = function (_React$Component5) {
 	_inherits(Options, _React$Component5);
 
-	function Options() {
+	function Options(props) {
 		_classCallCheck(this, Options);
 
-		return _possibleConstructorReturn(this, (Options.__proto__ || Object.getPrototypeOf(Options)).apply(this, arguments));
+		var _this5 = _possibleConstructorReturn(this, (Options.__proto__ || Object.getPrototypeOf(Options)).call(this, props));
+
+		_this5.removeAll = _this5.removeAll.bind(_this5);
+		return _this5;
 	}
 
 	_createClass(Options, [{
 		key: "removeAll",
 		value: function removeAll() {
-			alert('removeAll');
+			alert(this.props.options);
 		}
 	}, {
 		key: "render",

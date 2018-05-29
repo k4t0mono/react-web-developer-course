@@ -56,10 +56,15 @@ class Option extends React.Component {
 }
 
 
-//{ app.options.map((op) => <li key={ op }>{ op }</li>) }
 class Options extends React.Component {
+	constructor(props) {
+		super(props);
+
+		this.removeAll = this.removeAll.bind(this);
+	}
+
 	removeAll() {
-		alert('removeAll');
+		alert(this.props.options);
 	}
 
 	render() {
