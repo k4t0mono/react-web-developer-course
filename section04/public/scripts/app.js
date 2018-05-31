@@ -8,48 +8,30 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Counter = function (_React$Component) {
-	_inherits(Counter, _React$Component);
+// I'm just a comment
 
-	function Counter(props) {
-		_classCallCheck(this, Counter);
+var Toggle = function (_React$Component) {
+	_inherits(Toggle, _React$Component);
 
-		var _this = _possibleConstructorReturn(this, (Counter.__proto__ || Object.getPrototypeOf(Counter)).call(this, props));
+	function Toggle(props) {
+		_classCallCheck(this, Toggle);
 
-		_this.addOne = _this.addOne.bind(_this);
-		_this.minusOne = _this.minusOne.bind(_this);
-		_this.reset = _this.reset.bind(_this);
+		var _this = _possibleConstructorReturn(this, (Toggle.__proto__ || Object.getPrototypeOf(Toggle)).call(this, props));
+
+		_this.toggle = _this.toggle.bind(_this);
 
 		_this.state = {
-			count: 0
+			toggle: false
 		};
 		return _this;
 	}
 
-	_createClass(Counter, [{
-		key: 'addOne',
-		value: function addOne() {
+	_createClass(Toggle, [{
+		key: 'toggle',
+		value: function toggle() {
 			this.setState(function (ps) {
 				return {
-					count: ps.count + 1
-				};
-			});
-		}
-	}, {
-		key: 'minusOne',
-		value: function minusOne() {
-			this.setState(function (ps) {
-				return {
-					count: ps.count - 1
-				};
-			});
-		}
-	}, {
-		key: 'reset',
-		value: function reset() {
-			this.setState(function (ps) {
-				return {
-					count: 0
+					toggle: !ps.toggle
 				};
 			});
 		}
@@ -62,64 +44,27 @@ var Counter = function (_React$Component) {
 				React.createElement(
 					'h1',
 					null,
-					'Count: ',
-					this.state.count
+					'Toggle App'
 				),
 				React.createElement(
 					'button',
-					{ onClick: this.addOne },
-					'+1'
+					{ onClick: this.toggle },
+					this.state.toggle ? 'Hide text' : 'Show text'
 				),
-				React.createElement(
-					'button',
-					{ onClick: this.minusOne },
-					'-1'
-				),
-				React.createElement(
-					'button',
-					{ onClick: this.reset },
-					'Reset'
+				this.state.toggle && React.createElement(
+					'div',
+					null,
+					React.createElement(
+						'p',
+						null,
+						'I\'m a super secret text'
+					)
 				)
 			);
 		}
 	}]);
 
-	return Counter;
+	return Toggle;
 }(React.Component);
 
-ReactDOM.render(React.createElement(Counter, null), document.getElementById('app'));
-
-/*
-let count = 0;
-
-const addOne = () => {
-	count++;
-	renderCounterApp();
-};
-
-const minusOne = () => {
-	count--;
-	renderCounterApp();
-};
-
-const reset = () => {
-	count = 0;
-	renderCounterApp();
-};
-
-
-const renderCounterApp = () => {
-	const countDOM = (
-		<div>
-			<h1>Count: { count }</h1>
-			<button onClick={ addOne }>+1</button>
-			<button onClick={ minusOne }>-1</button>
-			<button onClick={ reset }>Reset</button>
-		</div>
-	);
-
-	ReactDOM.render(countDOM, appRoot);
-};
-
-renderCounterApp();
-*/
+ReactDOM.render(React.createElement(Toggle, null), document.getElementById('app'));

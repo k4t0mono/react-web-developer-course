@@ -1,28 +1,38 @@
 // I'm just a comment
 
-console.log("FFF");
+class Toggle extends React.Component {
+	constructor(props) {
+		super(props);
+		
+		this.toggle = this.toggle.bind(this);
 
-let visible = false;
+		this.state = {
+			toggle: false
+		}
+	}
 
-const toggleText = () => {
-	visible = !visible;
+	toggle() {
+		this.setState((ps) => {
+			return {
+				toggle: !ps.toggle
+			}
+		});
+	}
 
-	render();
+	render() {
+		return (
+			<div>
+				<h1>Toggle App</h1>
+				<button onClick={ this.toggle }>
+					{ this.state.toggle ? 'Hide text' : 'Show text' }
+				</button>
+				{ this.state.toggle && (
+					<div><p>I'm a super secret text</p></div>
+				) }
+			</div>
+		)
+	}
 }
 
-const render = () => {
+ReactDOM.render(<Toggle />, document.getElementById('app'));
 
-	const jsx = (
-		<div>
-			<h1>Toggle APP</h1>
-			<button onClick={ toggleText }>
-				{ visible ? 'Hide text' : 'Show text' }
-			</button>
-			{ visible && ( <p>I'm visible now</p> ) }
-		</div>
-	);
-	
-	ReactDOM.render(jsx, document.getElementById('app'));
-};
-
-render();
