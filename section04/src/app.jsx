@@ -1,16 +1,48 @@
 // app.jsx
 
 class IndecisionApp extends React.Component {
+	constructor(props) {
+		super(props);
+
+		this.handleDeleteOptions = this.handleDeleteOptions.bind(this);
+		this.handlePick = this.handlePick.bind(this);
+
+		this.state = {
+			options: ['Asoka', 'Ashoka', 'Soka']
+		};
+	}
+
+	handleDeleteOptions() {
+		this.setState(() => {
+			return { options: [] };
+		});
+	}
+
+	handlePick() {
+		const i = Math.floor(Math.random() * this.state.options.length);
+		const option = this.state.options[i];
+
+		alert(option);
+	}
+	
 	render() {
 		const title = "Indecision";
 		const subtitle = "Put your life in the hands of a computer";
-		let options = ['Asoka', 'Ashoka', 'Soka'];
 
 		return (
 			<div>
 				<Header title={ title } subtitle={ subtitle } />
-				<Action />
-				<Options options={ options } />
+
+				<Action
+					hasOption={ this.state.options.length > 0 }
+					handlePick={ this.handlePick }
+				/>
+
+				<Options
+					options={ this.state.options }
+					handleDeleteOptions={ this.handleDeleteOptions }
+				/>
+
 				<AddOption />
 			</div>
 		)
@@ -31,14 +63,12 @@ class Header extends React.Component {
 
 
 class Action extends React.Component {
-	handlePick() {
-		alert('Testing');
-	}
-
 	render() {
 		return (
 			<div>
-				<button onClick={ this.handlePick }>What sould I do?</button>
+				<button onClick={ this.props.handlePick } disabled={ !this.props.hasOption }>
+					What sould I do?
+				</button>
 			</div>
 		);
 	}
@@ -57,20 +87,10 @@ class Option extends React.Component {
 
 
 class Options extends React.Component {
-	constructor(props) {
-		super(props);
-
-		this.removeAll = this.removeAll.bind(this);
-	}
-
-	removeAll() {
-		alert(this.props.options);
-	}
-
 	render() {
 		return (
 			<div>
-				<button onClick={ this.removeAll }>Remove All</button>
+				<button onClick={ this.props.handleDeleteOptions }>Remove All</button>
 
 				{ this.props.options.map((op) => <Option key={ op } optionText={ op } />) }
 			</div>
