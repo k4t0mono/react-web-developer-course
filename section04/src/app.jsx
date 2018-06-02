@@ -6,9 +6,10 @@ class IndecisionApp extends React.Component {
 
 		this.handleDeleteOptions = this.handleDeleteOptions.bind(this);
 		this.handlePick = this.handlePick.bind(this);
+		this.handelAddOption = this.handelAddOption.bind(this);
 
 		this.state = {
-			options: ['Asoka', 'Ashoka', 'Soka']
+			options: []
 		};
 	}
 
@@ -23,6 +24,17 @@ class IndecisionApp extends React.Component {
 		const option = this.state.options[i];
 
 		alert(option);
+	}
+
+	handelAddOption(option) {
+		if(!option) { return 'Enter a valid value to add intem' }
+		else if(this.state.options.includes(option)) { return 'This option already exits'; }
+
+		this.setState((pv) => {
+			return {
+				options: pv.options.concat(option)
+			}
+		});
 	}
 	
 	render() {
@@ -43,7 +55,9 @@ class IndecisionApp extends React.Component {
 					handleDeleteOptions={ this.handleDeleteOptions }
 				/>
 
-				<AddOption />
+			<AddOption
+				handelAddOption={ this.handelAddOption }
+			/>
 			</div>
 		)
 	}
@@ -100,22 +114,31 @@ class Options extends React.Component {
 
 
 class AddOption extends React.Component {
+	constructor(props) {
+		super(props);
+
+		this.state = { error: undefined };
+
+		this.onFormSubmit = this.onFormSubmit.bind(this);
+	}
+
 	onFormSubmit(e) {
 		e.preventDefault();	
 
 		const option = e.target.elements.option.value.trim();
-		if(!option) { return; }
+		const error = this.props.handelAddOption(option);
 
-		alert(`submit ${option}`);
+		this.setState(() => { return { error }; });
 	}
 
 	render() {
 		return (
 			<div>
+				{ this.state.error && <p>{ this.state.error }</p> }
 				<form onSubmit={ this.onFormSubmit }>
-					<input type='text' name='option' />
+					<input type='text' name='option'autoComplete='off' />
 					<button>Add Option</button>
-			</form>
+				</form>
 			</div>
 		)
 	}
