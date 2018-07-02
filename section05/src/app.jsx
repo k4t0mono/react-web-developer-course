@@ -7,6 +7,7 @@ class IndecisionApp extends React.Component {
 		this.handleDeleteOptions = this.handleDeleteOptions.bind(this);
 		this.handlePick = this.handlePick.bind(this);
 		this.handelAddOption = this.handelAddOption.bind(this);
+		this.handleDeleteOption = this.handleDeleteOption.bind(this);
 
 		this.state = { options: props.options };
 	}
@@ -15,6 +16,12 @@ class IndecisionApp extends React.Component {
 		this.setState(() => {
 			return { options: [] };
 		});
+	}
+
+	handleDeleteOption(option) {
+		this.setState((ps) => {
+			return { options: ps.options.filter((op) => op !== option) }
+		})
 	}
 
 	handlePick() {
@@ -48,11 +55,12 @@ class IndecisionApp extends React.Component {
 				<Options
 					options={ this.state.options }
 					handleDeleteOptions={ this.handleDeleteOptions }
+					handleDeleteOption={ this.handleDeleteOption }
 				/>
 
-			<AddOption
-				handelAddOption={ this.handelAddOption }
-			/>
+				<AddOption
+					handelAddOption={ this.handelAddOption }
+				/>
 			</div>
 		)
 	}
@@ -90,7 +98,12 @@ const Action = (props) => {
 
 const Option = (props) => {
 	return (
-		<div>{ props.optionText }</div>
+		<div>
+			{ props.optionText }
+			<button onClick={ (e) => props.handleDeleteOption(props.optionText) }>
+				remove
+			</button>
+		</div>
 	);
 };
 
@@ -100,7 +113,13 @@ const Options = (props) => {
 		<div>
 			<button onClick={ props.handleDeleteOptions }>Remove All</button>
 
-			{ props.options.map((op) => <Option key={ op } optionText={ op } />) }
+			{ props.options.map((op) => (
+				<Option
+					key={ op }
+					optionText={ op }
+					handleDeleteOption={ props.handleDeleteOption } 
+				/>
+			)) }
 		</div>
 	);
 };
@@ -137,14 +156,4 @@ class AddOption extends React.Component {
 	}
 }
 
-//const User = (props) => {
-	//return (
-		//<div>
-			//<p>Name: { props.name }</p>
-			//<p>Age: { props.age }</p>
-		//</div>
-	//)
-//};
-
-
-ReactDOM.render(<IndecisionApp options={ ['aaa', 'bbb'] } />, document.getElementById('app'));
+ReactDOM.render(<IndecisionApp />, document.getElementById('app'));

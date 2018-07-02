@@ -21,6 +21,7 @@ var IndecisionApp = function (_React$Component) {
 		_this.handleDeleteOptions = _this.handleDeleteOptions.bind(_this);
 		_this.handlePick = _this.handlePick.bind(_this);
 		_this.handelAddOption = _this.handelAddOption.bind(_this);
+		_this.handleDeleteOption = _this.handleDeleteOption.bind(_this);
 
 		_this.state = { options: props.options };
 		return _this;
@@ -31,6 +32,15 @@ var IndecisionApp = function (_React$Component) {
 		value: function handleDeleteOptions() {
 			this.setState(function () {
 				return { options: [] };
+			});
+		}
+	}, {
+		key: 'handleDeleteOption',
+		value: function handleDeleteOption(option) {
+			this.setState(function (ps) {
+				return { options: ps.options.filter(function (op) {
+						return op !== option;
+					}) };
 			});
 		}
 	}, {
@@ -69,7 +79,8 @@ var IndecisionApp = function (_React$Component) {
 				}),
 				React.createElement(Options, {
 					options: this.state.options,
-					handleDeleteOptions: this.handleDeleteOptions
+					handleDeleteOptions: this.handleDeleteOptions,
+					handleDeleteOption: this.handleDeleteOption
 				}),
 				React.createElement(AddOption, {
 					handelAddOption: this.handelAddOption
@@ -122,7 +133,14 @@ var Option = function Option(props) {
 	return React.createElement(
 		'div',
 		null,
-		props.optionText
+		props.optionText,
+		React.createElement(
+			'button',
+			{ onClick: function onClick(e) {
+					return props.handleDeleteOption(props.optionText);
+				} },
+			'remove'
+		)
 	);
 };
 
@@ -136,7 +154,11 @@ var Options = function Options(props) {
 			'Remove All'
 		),
 		props.options.map(function (op) {
-			return React.createElement(Option, { key: op, optionText: op });
+			return React.createElement(Option, {
+				key: op,
+				optionText: op,
+				handleDeleteOption: props.handleDeleteOption
+			});
 		})
 	);
 };
@@ -195,14 +217,4 @@ var AddOption = function (_React$Component2) {
 	return AddOption;
 }(React.Component);
 
-//const User = (props) => {
-//return (
-//<div>
-//<p>Name: { props.name }</p>
-//<p>Age: { props.age }</p>
-//</div>
-//)
-//};
-
-
-ReactDOM.render(React.createElement(IndecisionApp, { options: ['aaa', 'bbb'] }), document.getElementById('app'));
+ReactDOM.render(React.createElement(IndecisionApp, null), document.getElementById('app'));
