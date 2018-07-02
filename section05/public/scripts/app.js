@@ -35,6 +35,29 @@ var IndecisionApp = function (_React$Component) {
 			});
 		}
 	}, {
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			try {
+				var options = JSON.parse(localStorage.getItem('options'));
+				if (!options) {
+					return;
+				}
+
+				this.setState(function () {
+					return { options: options };
+				});
+			} catch (e) {
+				console.log(e);
+			}
+		}
+	}, {
+		key: 'componentDidUpdate',
+		value: function componentDidUpdate(prevProps, prevState) {
+			if (prevState.options.length != this.state.options.length) {
+				localStorage.setItem('options', JSON.stringify(this.state.options));
+			}
+		}
+	}, {
 		key: 'handleDeleteOption',
 		value: function handleDeleteOption(option) {
 			this.setState(function (ps) {
@@ -153,6 +176,11 @@ var Options = function Options(props) {
 			{ onClick: props.handleDeleteOptions },
 			'Remove All'
 		),
+		!props.options.length && React.createElement(
+			'p',
+			null,
+			'Please add an option to start'
+		),
 		props.options.map(function (op) {
 			return React.createElement(Option, {
 				key: op,
@@ -188,6 +216,10 @@ var AddOption = function (_React$Component2) {
 			this.setState(function () {
 				return { error: error };
 			});
+
+			if (!error) {
+				e.target.elements.option.value = '';
+			}
 		}
 	}, {
 		key: 'render',
