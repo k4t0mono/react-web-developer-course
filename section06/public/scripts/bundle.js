@@ -342,11 +342,11 @@ eval("\n\nif (false) {} else {\n  module.exports = __webpack_require__(/*! ./cjs
 /*!*********************!*\
   !*** ./src/app.jsx ***!
   \*********************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ \"./node_modules/react-dom/index.js\");\n/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);\n// new app.jsx\n\n\n\n\nconsole.log('app.jsx engage!')\n\nconst t = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('p', {}, 'ff');\nreact_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(t, document.getElementById('app'));\n\n\n//# sourceURL=webpack:///./src/app.jsx?");
+eval("\n\nvar _react = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactDom = __webpack_require__(/*! react-dom */ \"./node_modules/react-dom/index.js\");\n\nvar _reactDom2 = _interopRequireDefault(_reactDom);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n// new app.jsx\n\nconsole.log('app.jsx engage!');\n\nvar t = _react2.default.createElement(\n  'p',\n  null,\n  'THIS IS VIM!!!'\n);\n_reactDom2.default.render(t, document.getElementById('app'));\n\n//# sourceURL=webpack:///./src/app.jsx?");
 
 /***/ })
 
