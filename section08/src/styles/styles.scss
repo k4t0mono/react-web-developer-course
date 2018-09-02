@@ -1,5 +1,4 @@
-$brand-color: #ccff33;
+// base style file
 
-* {
-	color: $brand-color;
-}
+@import './base/base';
+@import './components/header';
