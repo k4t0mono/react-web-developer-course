@@ -7,7 +7,7 @@ export default class AddOption extends React.Component {
 	state = { error: undefined };
 
 	onFormSubmit = (e) => {
-		e.preventDefault();	
+		e.preventDefault();
 
 		const option = e.target.elements.option.value.trim();
 		const error = this.props.handelAddOption(option);
@@ -23,7 +23,7 @@ export default class AddOption extends React.Component {
 				{ this.state.error && <p>{ this.state.error }</p> }
 				<form onSubmit={ this.onFormSubmit }>
 					<input type='text' name='option'autoComplete='off' />
-					<button>Add Option</button>
+					<button className='button'>Add Option</button>
 				</form>
 			</div>
 		)

@@ -9,3 +9,11 @@ body {
 	font-family: 'Noto Sans', 'Roboto', 'Arial', sans-serif;
 	font-size: $m-size;
 }
+
+botton {
+	cursor: pointer;
+
+	&:disabled {
+		cursor: default;
+	}
+}
