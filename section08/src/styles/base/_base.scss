@@ -1,9 +1,11 @@
 // base.scss
+
 html {
 	font-size: 62.5%;
 }
 
 body {
+	background: $background1;
 	font-family: 'Noto Sans', 'Roboto', 'Arial', sans-serif;
-	font-size: 1.6rem;
+	font-size: $m-size;
 }

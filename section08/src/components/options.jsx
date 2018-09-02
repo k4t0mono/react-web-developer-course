@@ -14,7 +14,7 @@ const Options = (props) => (
 			<Option
 				key={ op }
 				optionText={ op }
-				handleDeleteOption={ props.handleDeleteOption } 
+				handleDeleteOption={ props.handleDeleteOption }
 			/>
 		)) }
 	</div>
