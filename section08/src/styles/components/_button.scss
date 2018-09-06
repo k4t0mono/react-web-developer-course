@@ -7,10 +7,10 @@
 	font-size: $l-size;
 	color: white;
 
-	background: $background2;
+	background: $purple;
 	margin-bottom: $xl-size;
 	border: none;
-	border-bottom: .6rem solid darken($background2, 10);
+	border-bottom: .6rem solid darken($purple, 10);
 	padding: 2.4rem;
 
 	&:disabled {
@@ -22,13 +22,13 @@
 	font-weight: 500;
 	color: white;
 
-	background: $background2;
+	background: $purple;
 	border: none;
-	border-bottom: .3rem solid darken($background2, 10);
+	border-bottom: .3rem solid darken($purple, 10);
 	padding: $s-size;
 
 	&--link {
-		color: $foreground0;
+		color: $off-white;
 
 		background: none;
 		border: none;

@@ -73,20 +73,23 @@ class IndecisionApp extends React.Component {
 				<Header subtitle={ subtitle } />
 
 				<div className='container'>
+
 					<Action
 						hasOption={ this.state.options.length > 0 }
 						handlePick={ this.handlePick }
 					/>
 
-					<Options
-						options={ this.state.options }
-						handleDeleteOptions={ this.handleDeleteOptions }
-						handleDeleteOption={ this.handleDeleteOption }
-					/>
+					<div className='widget'>
+						<Options
+							options={ this.state.options }
+							handleDeleteOptions={ this.handleDeleteOptions }
+							handleDeleteOption={ this.handleDeleteOption }
+						/>
 
-					<AddOption
-						handelAddOption={ this.handelAddOption }
-					/>
+						<AddOption
+							handelAddOption={ this.handelAddOption }
+						/>
+					</div>
 				</div>
 
 				<OptionModal
