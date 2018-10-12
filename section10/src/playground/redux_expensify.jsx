@@ -1,7 +1,7 @@
 import { createStore, combineReducers } from 'redux';
 import uuid from 'uuid';
 
-const add_expense = ({ description='', note='', amount=0, created_at=0 }) => ({
+const add_expense = ({ description = '', note = '', amount = 0, created_at = 0 }) => ({
 	type: 'add_expense',
 	expense: {
 		id: uuid(),
@@ -17,6 +17,12 @@ const remove_expense = ({ id } = {}) => ({
 	id
 });
 
+const edit_expense = (id, updates) => ({
+	type: 'edit_expense',
+	id,
+	updates
+});
+
 const expenses_reducer = (state = [], action) => {
 	switch (action.type) {
 		case 'add_expense':
@@ -25,10 +31,27 @@ const expenses_reducer = (state = [], action) => {
 		case 'remove_expense':
 			return state.filter(({ id }) => id !== action.id );
 
+		case 'edit_expense':
+			return state.map((expense) => {
+				if(expense.id == action.id)
+					return {
+						...expense,
+						...action.updates,
+					}
+
+				return expense
+			});
+
 		default:
 			return state;
 	}
 }
+
+
+const set_text_filter = (text = '') => ({
+	type: 'set_text_filter',
+	text,
+});
 
 const filter_default_state = {
 	text: '',
@@ -38,11 +61,18 @@ const filter_default_state = {
 }
 
 const filter_reducer = (state = filter_default_state, action) => {
-	switch(action) {
+	switch(action.type) {
+		case 'set_text_filter':
+			return {
+				...state,
+				text: action.text,
+			}
+
 		default:
 			return state;
 	}
 }
+
 
 const store = createStore(
 	combineReducers({
@@ -58,8 +88,9 @@ store.subscribe(() => {
 const e0 = store.dispatch(add_expense({ description: 'docinho', amount: 1 }));
 const e1 = store.dispatch(add_expense({ description: 'caipirinha', amount: 11.5 }));
 
-console.log(e0.expense.id);
 store.dispatch(remove_expense({ id: e0.expense.id }));
+store.dispatch(edit_expense(e1.expense.id, { amount: 5 }));
+store.dispatch(set_text_filter('asdf'));
 
 const demoState = {
 	expenses: [{
