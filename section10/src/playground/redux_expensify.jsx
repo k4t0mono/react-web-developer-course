@@ -110,6 +110,22 @@ const filter_reducer = (state = filter_default_state, action) => {
 }
 
 
+const get_visible_expenses = (expenses, { text, sort_by, start_date, end_date }) => {
+	return expenses.filter((expense) => {
+		const start_date_match = (typeof start_date !== 'number')
+			|| (expense.created_at >= start_date);
+
+		const end_date_match = (typeof end_date !== 'number')
+			|| (expense.created_at <= end_date);
+
+		const text_match = expense.description.toLowerCase()
+			.includes(text.toLowerCase());
+
+		return start_date_match && end_date_match && text_match;
+	});
+};
+
+
 const store = createStore(
 	combineReducers({
 		expenses: expenses_reducer,
@@ -118,34 +134,12 @@ const store = createStore(
 );
 
 store.subscribe(() => {
-	console.log(store.getState());
+	const state = store.getState();
+
+	const ve = get_visible_expenses(state.expenses, state.filter);
+	console.log(ve);
 });
 
-/*
-const e0 = store.dispatch(add_expense({ description: 'docinho', amount: 1 }));
-const e1 = store.dispatch(add_expense({ description: 'caipirinha', amount: 11.5 }));
-
-store.dispatch(remove_expense({ id: e0.expense.id }));
-store.dispatch(edit_expense(e1.expense.id, { amount: 5 }));
-store.dispatch(set_text_filter('asdf'));
-store.dispatch(sort_by_amount());
-*/
-
-store.dispatch(set_start_date(123));
-store.dispatch(set_end_date(153));
-
-const demoState = {
-	expenses: [{
-		id: 'eWalmZg',
-		description: 'Sethember rent',
-		note: '????',
-		amount: 43272,
-		createAt: 0,
-	}],
-	filters: {
-		text: 'rent',
-		sortBy: 'amount',
-		startDate: undefined,
-		endDate: undefined,
-	},
-};
+store.dispatch(set_text_filter('caipirinha'));
+store.dispatch(add_expense({ description: 'teste', amount: 4267, created_at: 1534 }));
+store.dispatch(add_expense({ description: 'caipirinha', amount: 1877, created_at: -50 }));
