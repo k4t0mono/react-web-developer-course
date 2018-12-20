@@ -122,6 +122,12 @@ const get_visible_expenses = (expenses, { text, sort_by, start_date, end_date })
 			.includes(text.toLowerCase());
 
 		return start_date_match && end_date_match && text_match;
+	}).sort((a, b) => {
+		if(sort_by === 'date')
+			return a.created_at < b.created_at ? 1 : 0;
+
+		if(sort_by === 'amount')
+		return a.amount < b.amount ? 1 : 0;
 	});
 };
 
@@ -140,6 +146,7 @@ store.subscribe(() => {
 	console.log(ve);
 });
 
-store.dispatch(set_text_filter('caipirinha'));
-store.dispatch(add_expense({ description: 'teste', amount: 4267, created_at: 1534 }));
-store.dispatch(add_expense({ description: 'caipirinha', amount: 1877, created_at: -50 }));
+store.dispatch(add_expense({ description: 'teste', amount: 4267, created_at: 1 }));
+store.dispatch(add_expense({ description: 'caipirinha', amount: 1877, created_at: 2 }));
+
+store.dispatch(sort_by_amount())
