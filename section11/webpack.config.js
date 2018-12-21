@@ -3,7 +3,8 @@
 const path = require('path');
 
 module.exports = {
-	entry: './src/app.jsx',
+	// entry: './src/app.jsx',
+	entry: './src/playground/hoc.jsx',
 	output: {
 		path: path.resolve(__dirname, './public/scripts'),
 		filename: 'bundle.js'
