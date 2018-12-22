@@ -14,8 +14,8 @@ import get_visible_expenses from './selectors/expenses';
 
 
 const store = ConfigStore();
-store.dispatch(add_expense({ description: 'asd' }));
-store.dispatch(add_expense({ description: 'qwe' }));
+store.dispatch(add_expense({ description: 'Caipirnha', amount: 6.59, created_at: 1545508445 }));
+store.dispatch(add_expense({ description: 'rent' }));
 store.dispatch(set_text_filter('asds'));
 
 setTimeout(() => {
