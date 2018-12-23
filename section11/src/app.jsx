@@ -10,26 +10,17 @@ import AppRouter from './routers/AppRouter.jsx';
 import ConfigStore from './store/configStore';
 import { add_expense } from './actions/expenses';
 import { set_text_filter } from './actions/filters';
-import get_visible_expenses from './selectors/expenses';
 
 
 const store = ConfigStore();
-store.dispatch(add_expense({ description: 'Caipirnha', amount: 6.59, created_at: 1545508445 }));
-store.dispatch(add_expense({ description: 'rent' }));
-store.dispatch(set_text_filter('asds'));
-
-setTimeout(() => {
-    store.dispatch(set_text_filter('rent'));
-}, 3000);
-
-const state = store.getState();
-const visible = get_visible_expenses(state.expenses, state.filter);
-console.log(visible);
+store.dispatch(add_expense({ description: 'Vodka bb', amount: 6.59 }));
+store.dispatch(add_expense({ description: 'Caramelo bb', created_at: 345 }));
+store.dispatch(add_expense({ description: 'Dadinho dd', amount: 10.53 }));
 
 const jsx = (
-    <Provider store={ store }>
-        <AppRouter />
-    </Provider>
+	<Provider store={ store }>
+		<AppRouter />
+	</Provider>
 )
 
 ReactDOM.render(jsx, document.getElementById('app'));
