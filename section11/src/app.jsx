@@ -13,9 +13,9 @@ import { set_text_filter } from './actions/filters';
 
 
 const store = ConfigStore();
-store.dispatch(add_expense({ description: 'Vodka bb', amount: 6.59 }));
+store.dispatch(add_expense({ description: 'Vodka bb', amount: 659 }));
 store.dispatch(add_expense({ description: 'Caramelo bb', created_at: 345 }));
-store.dispatch(add_expense({ description: 'Dadinho dd', amount: 10.53 }));
+store.dispatch(add_expense({ description: 'Dadinho dd', amount: 1053 }));
 
 const jsx = (
 	<Provider store={ store }>

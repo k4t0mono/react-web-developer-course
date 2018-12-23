@@ -9,13 +9,18 @@ import 'react-dates/initialize'
 
 class ExpenseForm extends React.Component {
 
-    state = {
-        description: '',
-        note: '',
-        amount: '',
-        created_at: moment(),
-        calendar_focused: false,
-        error_msg: ''
+    constructor(props) {
+        super(props);
+
+        const ex = props.expense ? props.expense : {};
+        this.state = {
+            description: ex.description ? ex.description : '',
+            note: ex.note ? ex.expense.note : '',
+            amount: ex.amount ? (ex.amount/100).toString() : '',
+            created_at: ex.created_at ? moment(ex.created_at) : moment(),
+            calendar_focused: false,
+            error_msg: ''
+        }
     }
 
     onDescriptionChange = (e) => {
