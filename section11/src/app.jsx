@@ -9,7 +9,6 @@ import './styles/styles.scss';
 import AppRouter from './routers/AppRouter.jsx';
 import ConfigStore from './store/configStore';
 import { add_expense } from './actions/expenses';
-import { set_text_filter } from './actions/filters';
 
 
 const store = ConfigStore();
