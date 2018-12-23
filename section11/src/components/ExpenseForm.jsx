@@ -15,6 +15,7 @@ class ExpenseForm extends React.Component {
         amount: '',
         created_at: moment(),
         calendar_focused: false,
+        error_msg: ''
     }
 
     onDescriptionChange = (e) => {
@@ -30,22 +31,42 @@ class ExpenseForm extends React.Component {
     onAmountChage = (e) => {
         const amount = e.target.value;
 
-        if(amount.match(/^\d*(\.\d{0,2})?$/))
+        if(!amount || amount.match(/^\d+(\.\d{0,2})?$/))
             this.setState(() => ({ amount }));
     }
 
     onDateChange = (created_at) => {
-        this.setState(() => ({ created_at }))
+        if(created_at)
+            this.setState(() => ({ created_at }))
     }
 
     onCalendarFocusChange = ({ focused }) => {
         this.setState(() => ({ calendar_focused: focused }))
     }
 
+    onSubmit = (e) => {
+        e.preventDefault();
+
+        if(!this.state.description || !this.state.amount) {
+            this.setState(() => ({ error_msg: 'Description and Amount are required' }))
+            return;
+        } else {
+            this.setState(() => ({ error_msg: '' }))
+        }
+        
+        this.props.onSubmit({
+            description: this.state.description,
+            amount: parseFloat(this.state.amount, 10) * 100,
+            created_at: this.state.created_at.unix(),
+            note: this.state.note,
+        });
+    }
+
     render() {
         return (
             <div>
-                <form action="">
+                { this.state.error_msg && <p>{ this.state.error_msg }</p> }
+                <form onSubmit={ this.onSubmit }>
                     <input
                         type="text"
                         placeholder="Description"
